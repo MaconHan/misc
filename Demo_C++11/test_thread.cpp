@@ -1,6 +1,7 @@
 #include <thread>
 #include <future>
 #include <chrono>
+#include <atomic>
 
 #include "gtest/gtest.h"
 
@@ -29,14 +30,15 @@ TEST_F(Thread_Test, Basic){
     ASSERT_TRUE(a == 50);
 }
 
-thread_local int G = 0;
+thread_local int g_int = 0;
+
 TEST_F(Thread_Test, Local){
     auto f1 = [](){
-        G = 100;
+        g_int = 100;
     };
     std::thread thr1(f1);
     thr1.join();
-    ASSERT_TRUE(G == 0);
+    ASSERT_TRUE(g_int == 0);
 }
 
 TEST_F(Thread_Test, Class){
@@ -126,4 +128,23 @@ TEST_F(Thread_Test, HardwareConcurrency){
     auto concurrency = std::thread::hardware_concurrency();
     std::cout << "HardwareConcurrency:" << concurrency << std::endl;
     ASSERT_TRUE(concurrency > 0);
+}
+
+TEST_F(Thread_Test, Atomic){
+    std::atomic_llong count(0);
+    std::size_t size = 5000 * 10000;
+    auto f = [](std::size_t size, std::atomic_llong &count){
+        for(auto i = 0LL; i < size; ++i)
+            count += 1;
+    };
+
+    std::thread thr1(f, size, std::ref(count));
+    std::thread thr2(f, size, std::ref(count));
+    std::thread thr3(f, size, std::ref(count));
+
+    thr1.join();
+    thr2.join();
+    thr3.join();
+
+    ASSERT_TRUE(count == size * 3);
 }

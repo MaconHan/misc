@@ -24,7 +24,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 			<Add directory="F:/utility/gtest-1.7.0/include/" />
-			<Add directory="D:/Program Files/CodeBlocks/MinGW/include" />
+			<Add directory="D:/Program Files (x86)/CodeBlocks/MinGW/include" />
 		</Compiler>
 		<Linker>
 			<Add library="gtest_main" />

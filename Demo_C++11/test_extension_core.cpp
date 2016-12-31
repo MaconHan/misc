@@ -3,6 +3,8 @@
 #include <utility>
 #include <vector>
 #include <map>
+#include <tuple>
+#include <typeinfo>
 
 #include "gtest/gtest.h"
 
@@ -243,26 +245,124 @@ struct Variadic{
 };
 
 TEST_F(ExtensionCore_Test,  VariadicTemplate1){
-    EXPECT_EQ(Variadic<>::size, 0);
-    EXPECT_EQ((Variadic<char, int>::size), 2);
+    ASSERT_TRUE(Variadic<>::size == 0);
+    ASSERT_TRUE((Variadic<char, int>::size == 2));
 }
 
 template<typename ...C>
-struct Complex: public C...
+struct CombineType
 {
-    Complex(C&&... base) : C(base)... {
+    using T = std::tuple<C...>;
+};
+
+template<typename ...C>
+struct ExpandFrontType{
+};
+template<typename B, typename ...C>
+struct ExpandFrontType<B, C...>
+{
+    using T = B;
+    using N = ExpandFrontType<C...>;
+};
+template<typename C>
+struct ExpandFrontType<C>
+{
+    using T = C;
+    using N = decltype(nullptr);
+};
+
+template<std::size_t S, typename ...C>
+struct ExpandBackTypeWrapper
+{
+    using T = typename std::tuple_element<S, std::tuple<C...>>::type;
+    using N = ExpandBackTypeWrapper<S - 1, C...>;
+
+    T i;
+    N j;
+
+    void hello()
+    {
+        j.hello();
+        std::cout << typeid(i).name() << std::endl;
+        std::cout << typeid(j).name() << std::endl;
     }
 };
+template<typename ...C>
+struct ExpandBackTypeWrapper<0, C...>
+{
+    using T = typename std::tuple_element<0, std::tuple<C...>>::type;
+    using N = decltype(nullptr);
+
+    T i;
+    N j;
+
+    void hello()
+    {
+        std::cout << typeid(T).name() << std::endl;
+        std::cout << typeid(N).name() << std::endl;
+    }
+};
+
+template<typename ...C>
+struct ExpandBackType
+{
+    enum {S = sizeof ...(C), I = S - 1};
+    using T = typename std::tuple_element<I, std::tuple<C...>>::type;
+    using N = ExpandBackTypeWrapper<I - 1, C...>;
+
+    T i;
+    N j;
+
+    void hello()
+    {
+        j.hello();
+        std::cout << typeid(i).name() << std::endl;
+        std::cout << typeid(j).name() << std::endl;
+    }
+};
+
+template<typename T>
+std::string SplitType(T&)
+{
+    return typeid(T).name();
+}
+template<typename ...T>
+std::vector<std::string> SplitTypeWrapper(T... a)
+{
+    return {SplitType(a)...};
+};
+
+
+template<typename ...C>
+struct MutiInheritance: public C...
+{
+    MutiInheritance(C&&... base) : C(base)... {
+    }
+};
+
 TEST_F(ExtensionCore_Test,  VariadicTemplate2){
-    Complex<std::string, std::pair<int, int>> c(std::string("abc"), std::pair<int, int>{1, 2});
+    using T1 = CombineType<int, float, std::string>;
+    ASSERT_TRUE((std::is_same<T1::T, std::tuple<int, float, std::string>>::value));
 
-    //ASSERT_TRUE(std::is_base_of<std::string, decltype(c)>::value);
-    std::string& s = c;
-    EXPECT_EQ(s, "abc");
+    using T2 = ExpandFrontType<int, float, std::string>;
+    ASSERT_TRUE((std::is_same<T2::T, int>::value));
+    ASSERT_TRUE((std::is_same<T2::N::T, float>::value));
+    ASSERT_TRUE((std::is_same<T2::N::N::T, std::string>::value));
+    ASSERT_TRUE((std::is_same<T2::N::N::N, decltype(nullptr)>::value));
 
-    std::pair<int, int> &p = c;
-    EXPECT_EQ(p.first, 1);
-    EXPECT_EQ(p.second, 2);
+    using T3 = ExpandBackType<int, float, std::string>;
+    ASSERT_TRUE((std::is_same<T3::T, std::string>::value));
+    ASSERT_TRUE((std::is_same<T3::N::T, float>::value));
+    ASSERT_TRUE((std::is_same<T3::N::N::T, int>::value));
+    ASSERT_TRUE((std::is_same<T3::N::N::N, decltype(nullptr)>::value));
+
+    std::vector<std::string> types = {typeid(int).name(), typeid(float).name(), typeid(std::string).name()};
+    ASSERT_TRUE(types == SplitTypeWrapper(int(1), float(1.2), std::string("abc")));
+
+    MutiInheritance<std::string, std::pair<int, int>> c(std::string("abc"), {1, 2});
+    ASSERT_TRUE(c.c_str() == std::string("abc"));
+    ASSERT_TRUE(c.first == 1);
+    ASSERT_TRUE(c.second == 2);
 }
 
 template<typename T, std::size_t N>
@@ -277,28 +377,30 @@ struct TypeGetter<T, 0>{
 template<std::size_t N>
 struct Getter
 {
-	template<typename T>
-	inline static typename TypeGetter<T, N>::type& get(T& val)
-	{
-		return Getter<N-1>::template get<typename T::N>(val.n);
-	}
+    template<typename T>
+    inline static typename TypeGetter<T, N>::type& get(T& val)
+    {
+        return Getter<N-1>::template get<typename T::N>(val.n);
+    }
 };
 template<>
 struct Getter<0>
 {
     template<typename T>
-	inline static typename TypeGetter<T, 0>::type& get(T& val)
-	{
-		return val.c;
-	}
+    inline static typename TypeGetter<T, 0>::type& get(T& val)
+    {
+        return val.c;
+    }
 };
 
 template<typename ...Args>
 struct MyTuple{
 };
+
 template<>
 struct MyTuple<>{
 };
+
 template<typename C, typename ...Args>
 struct MyTuple<C, Args...>{
     using M = MyTuple<C, Args...>;

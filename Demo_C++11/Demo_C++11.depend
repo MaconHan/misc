@@ -405,3 +405,193 @@
 	<string>
 	<stdio.h>
 
+1479264099 source:e:\study\misc\demo_c++11\main.cpp
+	"gtest/gtest.h"
+	<cstring>
+	<string>
+	<stdio.h>
+
+1341006770 d:\program files (x86)\codeblocks\mingw\include\ctype.h
+	<_mingw.h>
+	<stddef.h>
+
+1341006770 d:\program files (x86)\codeblocks\mingw\include\_mingw.h
+
+1341006776 d:\program files (x86)\codeblocks\mingw\include\stdlib.h
+	<_mingw.h>
+	<stddef.h>
+
+1341006776 d:\program files (x86)\codeblocks\mingw\include\stdio.h
+	<_mingw.h>
+	<stddef.h>
+	<stdarg.h>
+	<sys/types.h>
+
+1341006780 d:\program files (x86)\codeblocks\mingw\include\sys\types.h
+	<_mingw.h>
+	<stddef.h>
+
+1341006776 d:\program files (x86)\codeblocks\mingw\include\string.h
+	<_mingw.h>
+	<stddef.h>
+
+1341006778 d:\program files (x86)\codeblocks\mingw\include\sys\stat.h
+	<_mingw.h>
+	<stddef.h>
+	<sys/types.h>
+
+1341006776 d:\program files (x86)\codeblocks\mingw\include\unistd.h
+	<io.h>
+	<process.h>
+	<getopt.h>
+	<sys/types.h>
+
+1341006774 d:\program files (x86)\codeblocks\mingw\include\io.h
+	<_mingw.h>
+	<sys/types.h>
+
+1341006774 d:\program files (x86)\codeblocks\mingw\include\process.h
+	<_mingw.h>
+	<sys/types.h>
+	<stdint.h>
+
+1341006776 d:\program files (x86)\codeblocks\mingw\include\stdint.h
+	<stddef.h>
+
+1341006772 d:\program files (x86)\codeblocks\mingw\include\getopt.h
+	<_mingw.h>
+
+1341006776 d:\program files (x86)\codeblocks\mingw\include\strings.h
+	<string.h>
+
+1341006772 d:\program files (x86)\codeblocks\mingw\include\direct.h
+	<_mingw.h>
+	<stddef.h>
+	<io.h>
+
+1418003254 d:\program files (x86)\codeblocks\mingw\include\pthread.h
+	<stddef.h>
+	<errno.h>
+	<sys/types.h>
+	<process.h>
+	<limits.h>
+	<signal.h>
+	<sys/timeb.h>
+	"pthread_compat.h"
+	<pthread_unistd.h>
+
+1341006772 d:\program files (x86)\codeblocks\mingw\include\errno.h
+	<_mingw.h>
+
+1341006774 d:\program files (x86)\codeblocks\mingw\include\limits.h
+	<_mingw.h>
+
+1341006776 d:\program files (x86)\codeblocks\mingw\include\signal.h
+	<_mingw.h>
+
+1341006780 d:\program files (x86)\codeblocks\mingw\include\sys\timeb.h
+	<_mingw.h>
+	<sys/types.h>
+
+1418003254 d:\program files (x86)\codeblocks\mingw\include\pthread_compat.h
+	"pthread_time.h"
+
+1418003254 d:\program files (x86)\codeblocks\mingw\include\pthread_time.h
+	<sys/timeb.h>
+
+1418003254 d:\program files (x86)\codeblocks\mingw\include\pthread_unistd.h
+
+1341006776 d:\program files (x86)\codeblocks\mingw\include\time.h
+	<_mingw.h>
+	<stddef.h>
+
+1341006772 d:\program files (x86)\codeblocks\mingw\include\float.h
+	<_mingw.h>
+
+1341006774 d:\program files (x86)\codeblocks\mingw\include\mem.h
+	<string.h>
+
+1341006770 d:\program files (x86)\codeblocks\mingw\include\assert.h
+	<_mingw.h>
+
+1468977412 source:e:\study\misc\demo_c++11\test_chrono.cpp
+	<chrono>
+	<thread>
+	<ratio>
+	<sys/time.h>
+	"gtest/gtest.h"
+
+1341006780 d:\program files (x86)\codeblocks\mingw\include\sys\time.h
+	<time.h>
+
+1483000060 source:e:\study\misc\demo_c++11\test_extension_core.cpp
+	<functional>
+	<string>
+	<utility>
+	<vector>
+	<map>
+	<tuple>
+	<typeinfo>
+	"gtest/gtest.h"
+
+1468914873 source:e:\study\misc\demo_c++11\test_function.cpp
+	<iostream>
+	<utility>
+	<thread>
+	<functional>
+	<typeinfo>
+	"gtest/gtest.h"
+
+1458694117 source:e:\study\misc\demo_c++11\test_initializelist.cpp
+	<vector>
+	<map>
+	<string>
+	<initializer_list>
+	"gtest/gtest.h"
+
+1468821673 source:e:\study\misc\demo_c++11\test_lambda.cpp
+	<utility>
+	<functional>
+	<exception>
+	<stdexcept>
+	<vector>
+	<algorithm>
+	"gtest/gtest.h"
+
+1468993930 source:e:\study\misc\demo_c++11\test_locker.cpp
+	<atomic>
+	<thread>
+	<mutex>
+	<functional>
+	<algorithm>
+	"gtest/gtest.h"
+
+1469066108 source:e:\study\misc\demo_c++11\test_regex.cpp
+	<regex>
+	<vector>
+	<iterator>
+	<gtest/gtest.h>
+
+1458608204 source:e:\study\misc\demo_c++11\test_rvalue_ref.cpp
+	<iostream>
+	<string>
+	<utility>
+	<functional>
+	"gtest/gtest.h"
+
+1483058590 source:e:\study\misc\demo_c++11\test_thread.cpp
+	<thread>
+	<future>
+	<chrono>
+	<atomic>
+	"gtest/gtest.h"
+
+1468829668 source:e:\study\misc\demo_c++11\test_typetraits.cpp
+	<type_traits>
+	<iostream>
+	<utility>
+	<thread>
+	<vector>
+	<functional>
+	"gtest/gtest.h"
+
