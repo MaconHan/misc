@@ -595,3 +595,18 @@
 	<functional>
 	"gtest/gtest.h"
 
+1484200082 source:e:\study\misc\demo_c++11\cpp_14.cpp
+	"gtest/gtest.h"
+
+1484221892 source:e:\study\misc\demo_c++11\openmp.cpp
+	<iostream>
+	<time.h>
+	"gtest/gtest.h"
+	<omp.h>
+
+1484791098 source:e:\study\misc\demo_c++11\test_tuple.cpp
+	"gtest/gtest.h"
+	<tuple>
+	<type_traits>
+	<string>
+

@@ -16,8 +16,12 @@
 					<Add option="-std=c++11" />
 					<Add option="-g" />
 					<Add option="-U__STRICT_ANSI__" />
+					<Add option="-fopenmp" />
 					<Add option='-DVERSION=\&quot;abc\&quot;' />
 				</Compiler>
+				<Linker>
+					<Add library="pthread" />
+				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
@@ -40,6 +44,7 @@
 		<Unit filename="test_regex.cpp" />
 		<Unit filename="test_rvalue_ref.cpp" />
 		<Unit filename="test_thread.cpp" />
+		<Unit filename="test_tuple.cpp" />
 		<Unit filename="test_typetraits.cpp" />
 		<Extensions>
 			<DoxyBlocks>
